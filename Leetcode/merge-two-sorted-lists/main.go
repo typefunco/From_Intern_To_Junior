@@ -88,5 +88,3 @@ func CheckLenListNode(list1 *ListNode, list2 *ListNode) int {
 		return len(secondLen)
 	}
 }
-
-// hewy
