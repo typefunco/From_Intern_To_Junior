@@ -64,13 +64,13 @@ func main() {
 		path:   "usr/json",
 		weight: 3.2,
 	}
-	XMLFile := XMLFile{
+	XmlFile := XMLFile{
 		path:   "usr/xml",
 		weight: 5.8,
 	}
 
 	JsFile.Show()
-	XMLFile.Show()
+	XmlFile.Show()
 }
 ```
 Вроде выглядит неплохо. Создали структуру для JSON и XML файлов, всё круто работает. Но всё же тут есть пространство для улучшения. Давайте попробуем изменить код, чтобы он стал более правильным.
@@ -114,19 +114,19 @@ type XMLFile struct {
 }
 
 func (xml *XMLFile) Save(filename string) {
-	fmt.Println("Saved XML file", filename)
+	fmt.Println("Saved XMl file", filename)
 }
 func (xml *XMLFile) Read(filename string) {
-	fmt.Println("Read XML file", filename)
+	fmt.Println("Read XMl file", filename)
 }
 func (xml *XMLFile) Update(filename string) {
-	fmt.Println("Update XML file", filename)
+	fmt.Println("Update XMl file", filename)
 }
 func (xml *XMLFile) Delete(filename string) {
-	fmt.Println("Delete XML file", filename)
+	fmt.Println("Delete XMl file", filename)
 }
 func (xml *XMLFile) Show() {
-	fmt.Println("File XML Path:", xml.path, "| File Weight:", xml.weight, "mb")
+	fmt.Println("File XMl Path:", xml.path, "| File Weight:", xml.weight, "mb")
 }
 
 func ReadInfo(ac ActionsWithFile, filename string) {
@@ -138,15 +138,15 @@ func main() {
 		path:   "usr/json",
 		weight: 3.2,
 	}
-	XMLFile := XMLFile{
+	XMlFile := XMLFile{
 		path:   "usr/xml",
 		weight: 5.8,
 	}
 
 	JsFile.Show()
-	XMLFile.Show()
+	XMlFile.Show()
 
 	ReadInfo(&JsFile, "usr/json")
-	ReadInfo(&XMLFile, "usr/xml")
+	ReadInfo(&XMlFile, "usr/xml")
 }
 ```
