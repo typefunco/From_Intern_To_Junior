@@ -1,10 +1,10 @@
 # Interfaces
 
-Итак, поговорим про интерфейсы. До этого момента я считал интерфейсы не супер полезными штуками. Ну вот что можно сделать? Определить интерфейс, а потом создать структуру, которая будет удовлетворять этому интерфейсу? Давайте тогда просто создадим структуру без каких-либо там интерфейсов. Вроде мысль здравая, но так скажем она не дальновидная и скорее всего вы не осознаете всей мощи интерфейсов в языке Go<br><br>
+Итак, поговорим про интерфейсы. До этого момента я считал интерфейсы не супер полезными штуками. Ну вот что можно сделать? Определить интерфейс, а потом создать структуру, которая будет удовлетворять этому интерфейсу? Давайте тогда просто создадим структуру без каких-либо там интерфейсов. Вроде мысль здравая, но так скажем она не дальновидная и скорее всего вы не осознаете всей мощи интерфейсов в языке Go.
 
-<h3>Представим, что мы хотим создать структуру и методы для неё</h3>  
-``` go  
+### Представим, что мы хотим создать структуру и методы для неё
 
+```go
 package main
 
 import "fmt"
@@ -44,19 +44,19 @@ type XMLFile struct {
 }
 
 func (xml *XMLFile) Save(filename string) {
-	fmt.Println("Saved XMl file", filename)
+	fmt.Println("Saved XML file", filename)
 }
 func (xml *XMLFile) Read(filename string) {
-	fmt.Println("Read XMl file", filename)
+	fmt.Println("Read XML file", filename)
 }
 func (xml *XMLFile) Update(filename string) {
-	fmt.Println("Update XMl file", filename)
+	fmt.Println("Update XML file", filename)
 }
 func (xml *XMLFile) Delete(filename string) {
-	fmt.Println("Delete XMl file", filename)
+	fmt.Println("Delete XML file", filename)
 }
 func (xml *XMLFile) Show() {
-	fmt.Println("File XMl Path:", xml.path, "| File Weight:", xml.weight, "mb")
+	fmt.Println("File XML Path:", xml.path, "| File Weight:", xml.weight, "mb")
 }
 
 func main() {
@@ -64,20 +64,17 @@ func main() {
 		path:   "usr/json",
 		weight: 3.2,
 	}
-	XMlFile := XMLFile{
+	XMLFile := XMLFile{
 		path:   "usr/xml",
 		weight: 5.8,
 	}
 
 	JsFile.Show()
-	XMlFile.Show()
+	XMLFile.Show()
 }
-```  
-
-Вроде выглядит неплохо. Создали человека, создали короля, все круто работает. Но все же тут есть пространство для улучшения. Давай
-попробуем изменить код, чтобы он стал более правильным<br>
-
-``` go  
+```
+Вроде выглядит неплохо. Создали структуру для JSON и XML файлов, всё круто работает. Но всё же тут есть пространство для улучшения. Давайте попробуем изменить код, чтобы он стал более правильным.
+```go
 package main
 
 import "fmt"
@@ -117,19 +114,19 @@ type XMLFile struct {
 }
 
 func (xml *XMLFile) Save(filename string) {
-	fmt.Println("Saved XMl file", filename)
+	fmt.Println("Saved XML file", filename)
 }
 func (xml *XMLFile) Read(filename string) {
-	fmt.Println("Read XMl file", filename)
+	fmt.Println("Read XML file", filename)
 }
 func (xml *XMLFile) Update(filename string) {
-	fmt.Println("Update XMl file", filename)
+	fmt.Println("Update XML file", filename)
 }
 func (xml *XMLFile) Delete(filename string) {
-	fmt.Println("Delete XMl file", filename)
+	fmt.Println("Delete XML file", filename)
 }
 func (xml *XMLFile) Show() {
-	fmt.Println("File XMl Path:", xml.path, "| File Weight:", xml.weight, "mb")
+	fmt.Println("File XML Path:", xml.path, "| File Weight:", xml.weight, "mb")
 }
 
 func ReadInfo(ac ActionsWithFile, filename string) {
@@ -141,20 +138,15 @@ func main() {
 		path:   "usr/json",
 		weight: 3.2,
 	}
-	XMlFile := XMLFile{
+	XMLFile := XMLFile{
 		path:   "usr/xml",
 		weight: 5.8,
 	}
 
 	JsFile.Show()
-	XMlFile.Show()
+	XMLFile.Show()
 
 	ReadInfo(&JsFile, "usr/json")
-	ReadInfo(&XMlFile, "usr/xml")
+	ReadInfo(&XMLFile, "usr/xml")
 }
-```  
-Чем же лучше второй кусок кода? Тут все просто. У нас есть универсальный метод **ReadInfo**, который
-позволяет просто передавать структуру, которая удовлетворяет интерфейсу **ActionsWithFile**. Всё. По сути
-здесь мы сделали круто. Чем же круто? Ну если мы захотим поменять чтение файла с XML на JSON, то нам следует просто написать 
-реализацию и поменять в функции **ReadInfo** На JsonFile и все. Теперь мы не привязаны к конкретной реализации, что
-позволяет скрыть саму реализацию и дать абстракцию.
+```
